@@ -1,0 +1,7 @@
+# checkpoint
+src/ckpt/
+*.pkl
+
+# python cache
+__pycache__/
+*.pyc
