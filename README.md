@@ -62,14 +62,14 @@ python main.py --mode infer --dataset ucf --test $TEST$ --device cuda:0
 ```
 The corresponding `$TEST$` values and inference results are listed below:
 
-| GAT | Adapter | $\mathcal{L}_{na}$ | $\mathcal{L}_{od}$ | AUC | AUC$_b$ | AUC$_n$ | TEST |
+| GAT | Adapter | $\mathcal{L}_{na}$ | $\mathcal{L}_{od}$ | AUC | $AUC_b$ | $AUC_n$ | TEST |
 | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
 | × | × | × | × | 53.42 | 53.58 | 53.19 | `baseline` |
 | ✓ | × | × | × | 83.76 | 88.72 | 80.22 | `w_GAT` |
 | ✓ | ✓ | × | × | 85.43 | 93.95 | 86.84 | `w_GAT_adapter` |
 | ✓ | ✓ | × | ✓ | 86.55 | 94.29 | 88.34 | `wo_Lna` |
 | ✓ | ✓ | ✓ | × | 86.67 | 94.44 | 87.43 | `wo_Lod` |
-| ✓ | ✓ | ✓ | ✓ | **86.93** | **94.71** | **88.62** | `full` |
+| ✓ | ✓ | ✓ | ✓ | 86.93 | 94.71 | 88.62 | `full` |
 
 
 For ablation study training, Change the test list path in `src/configs_base2novel.py`, to fully test set, run the following command:
@@ -108,7 +108,7 @@ This project is built upon and inspired by several projects and prior works.
 
 ## License
 
-This repository is released under the [MIT License](./LICENSE).
+This repository is released under the [License](./LICENSE).
 
 
 ## Citation
@@ -116,7 +116,7 @@ This repository is released under the [MIT License](./LICENSE).
 If you find this repository useful for your research, please consider citing our paper:
 
 ```bibtex
-@inproceedings{your2026normality,
+@inproceedings{2026NEOVAD,
   title     = {Rethinking Open Vocabulary Video Anomaly Detection - Normality Matters},
   author    = {Deng, Yunhui and Wang, Hongxing},
   booktitle = {Proceedings of the International Conference on Pattern Recognition},
