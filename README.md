@@ -1,12 +1,12 @@
 # Rethinking Open Vocabulary Video Anomaly Detection - Normality Matters
-This repository contains the PyTorch implementation of our paper:  [Rethinking Open Vocabulary Video Anomaly Detection - Normality Matters]
+This is the official code of [Rethinking Open Vocabulary Video Anomaly Detection - Normality Matters]
 
 ![framework](./pic/framework.png)
 
 ---
 ## Setup
 ### Dependencies
-Please set up the environment by following the `requirement.yml` file.
+Please set up the environment by following the `requirement.yml` file, using the command `conda env create -f requirement.yml`.
 
 ## Reproduce 
 
@@ -40,75 +40,89 @@ If you want to training in scratch, The following files need to be modified in o
 
 - for ucf-crime run training command:
 ```
-python main.py --mode train --dataset ucf  --test best_ckpt seed 2 --device cuda:0
+python main.py --mode train --dataset ucf  --test best_ckpt --seed 2 --device cuda:0
 ```
 - for shanghaiTech run training command:
 ```
-python main.py --mode train --dataset sh  --test best_ckpt seed 1 --device cuda:0
+python main.py --mode train --dataset sh  --test best_ckpt --seed 1 --device cuda:0
 ```
 - for xd-violence run training command:
 ```
-python main.py --mode train --dataset xd  --test best_ckpt seed 20 --device cuda:0
+python main.py --mode train --dataset xd  --test best_ckpt --seed 20 --device cuda:0
 ```
 - for ubnormal run training command:
 ```
-python main.py --mode train --dataset ub  --test best_ckpt seed 1 --device cuda:0
+python main.py --mode train --dataset ub  --test best_ckpt --seed 1 --device cuda:0
 ```
 
 ### Ablation study
 For ablation study inference, Change the test list path in `src/configs_base2novel.py`, to fully/base/novel test set, run the following command:
-- baseline (line 1)
 ```
-python main.py --mode infer --dataset ucf --test baseline --device cuda:0
+python main.py --mode infer --dataset ucf --test $TEST$ --device cuda:0
 ```
-- w_GAT (line 2)
-```
-python main.py --mode infer --dataset ucf --test w_GAT --device cuda:0
-```
-- w_GAT_adapter (line 3)
-```
-python main.py --mode infer --dataset ucf --test w_GAT_adapter --device cuda:0
-```
-- wo_Lna (line 4)
-```
-python main.py --mode infer --dataset ucf --test wo_Lna --device cuda:0
-```
-- wo_Lod (line 5)
-```
-python main.py --mode infer --dataset ucf --test wo_Lod --device cuda:0
-```
-- full (line 6)
-```
-python main.py --mode infer --dataset ucf --test full --device cuda:0
-```
+The corresponding `$TEST$` values and inference results are listed below:
+
+| GAT | Adapter | $\mathcal{L}_{na}$ | $\mathcal{L}_{od}$ | AUC | AUC$_b$ | AUC$_n$ | TEST |
+| :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
+| × | × | × | × | 53.42 | 53.58 | 53.19 | `baseline` |
+| ✓ | × | × | × | 83.76 | 88.72 | 80.22 | `w_GAT` |
+| ✓ | ✓ | × | × | 85.43 | 93.95 | 86.84 | `w_GAT_adapter` |
+| ✓ | ✓ | × | ✓ | 86.55 | 94.29 | 88.34 | `wo_Lna` |
+| ✓ | ✓ | ✓ | × | 86.67 | 94.44 | 87.43 | `wo_Lod` |
+| ✓ | ✓ | ✓ | ✓ | **86.93** | **94.71** | **88.62** | `full` |
+
+
 For ablation study training, Change the test list path in `src/configs_base2novel.py`, to fully test set, run the following command:
-- baseline (line 1)
+- baseline (row 1)
 ```
 python main.py --mode train --dataset ucf --test baseline --seed 2 --adapter False --temporal False --lamda2 0 --lamda3 0 --device cuda:0
 ```
-- w_GAT (line 2)
+- w_GAT (row 2)
 ```
 python main.py --mode train --dataset ucf --test w_GAT --seed 2 --adapter False --temporal True --lamda2 0 --lamda3 0 --device cuda:0
 ```
-- w_GAT_adapter (line 3)
+- w_GAT_adapter (row 3)
 ```
 python main.py --mode train --dataset ucf --test w_GAT_adapter --seed 2 --adapter True --temporal True --lamda2 0 --lamda3 0 --device cuda:0
 ```
-- wo_Lna (line 4)
+- wo_Lna (row 4)
 ```
 python main.py --mode train --dataset ucf --test wo_Lna --seed 2 --adapter True --temporal True --lamda2 1 --lamda3 0 --device cuda:0
 ```
-- wo_Lod (line 5)
+- wo_Lod (row 5)
 ```
 python main.py --mode train --dataset ucf --test wo_Lod --seed 2 --adapter True --temporal True --lamda2 0 --lamda3 2 --device cuda:0
 ```
-- full (line 6)
+- full (row 6)
 ```
 python main.py --mode train --dataset ucf --test full --seed 2 --adapter True --temporal True --lamda2 1 --lamda3 2 --device cuda:0
 ```
 
 
+## Acknowledgements
 
+This project is built upon and inspired by several projects and prior works. 
+
+- [AA-CLIP](https://github.com/Mwxinnn/AA-CLIP)
+- [PLOVAD](https://github.com/ctX-u/PLOVAD)
+
+## License
+
+This repository is released under the [MIT License](./LICENSE).
+
+
+## Citation
+
+If you find this repository useful for your research, please consider citing our paper:
+
+```bibtex
+@inproceedings{your2026normality,
+  title     = {Rethinking Open Vocabulary Video Anomaly Detection - Normality Matters},
+  author    = {Deng, Yunhui and Wang, Hongxing},
+  booktitle = {Proceedings of the International Conference on Pattern Recognition},
+  year      = {2026}
+}
+```
 
 
 

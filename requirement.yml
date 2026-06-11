@@ -10,6 +10,7 @@ dependencies:
   - cudatoolkit=11.8
   - pytorch=2.2.1
   - torchvision=0.17.1
+  - torchmetrics=0.11.4
   - torchaudio=2.2.1
   - pytorch-cuda=11.8
   - numpy=1.26.4
@@ -21,7 +22,7 @@ dependencies:
   - tqdm
   - pyyaml=6.0.1
   - requests
-  - setuptools
+  - setuptools=69.5.1
   - wheel
   - pip:
       - appdirs==1.4.4
